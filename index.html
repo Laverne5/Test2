@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تهنئة للموظفين</title>
+    
+    <!-- خط كايرو -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f7f7f7;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            background: url('https://files.catbox.moe/2d99s4.webp') no-repeat center/cover;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 20px 0;
+        }
+
+        p {
+            font-size: 2rem;
+            margin: 10px 0;
+        }
+
+        .input-container {
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.5rem;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            outline: none;
+        }
+
+        #userNameDisplay {
+            margin-top: 30px;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 3rem; }
+            p { font-size: 1.5rem; }
+            input { font-size: 1.2rem; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function updateName() {
+            const input = document.getElementById('userName');
+            const display = document.getElementById('userNameDisplay');
+            display.textContent = input.value || 'ضيف عزيز';
+        }
+
+        function downloadCard() {
+            const card = document.querySelector('.card');
+            html2canvas(card, { useCORS: true, scale: 1 }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'employee_greeting.png';
+                link.click();
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="card" id="card">
+        <h1>تهنئة خاصة للموظفين</h1>
+        <p>نقدر جهودكم ونتمنى لكم المزيد من النجاح والتوفيق.</p>
+        <div class="input-container">
+            <input type="text" id="userName" placeholder="اكتب اسمك هنا" oninput="updateName()">
+        </div>
+        <div id="userNameDisplay">ضيف عزيز</div>
+    </div>
+    <button class="download-btn" onclick="downloadCard()">تحميل البطاقة</button>
+</body>
+</html>
